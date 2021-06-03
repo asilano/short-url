@@ -1,4 +1,5 @@
 class ShortenedUrlsController < ApplicationController
+  skip_before_action :authenticate_user!, only: :visit
   before_action :set_shortened_url, only: %i[ show edit update destroy ]
 
   # GET /shortened_urls or /shortened_urls.json
@@ -55,6 +56,13 @@ class ShortenedUrlsController < ApplicationController
       format.html { redirect_to shortened_urls_url, notice: "Shortened url was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def visit
+    @shortened_url = ShortenedUrl.find_by(short_form: params[:short_form])
+    @shortened_url.count_visit
+
+    redirect_to @shortened_url.target
   end
 
   private
