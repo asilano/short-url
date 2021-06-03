@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
+  resources :shortened_urls
   devise_for :users
 
-  devise_scope :user do
-    root to: 'devise/registrations#edit'
-  end
+  root to: 'shortened_urls#index'
 end

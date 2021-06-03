@@ -1,0 +1,17 @@
+<p>
+  <strong>Target:</strong>
+  <%= @shortened_url.target %>
+</p>
+
+<p>
+  <strong>Short form:</strong>
+  <%= @shortened_url.short_form %>
+</p>
+
+<p>
+  <strong>Visit count:</strong>
+  <%= @shortened_url.visit_count %>
+</p>
+
+<%= link_to 'Edit', edit_shortened_url_path(@shortened_url) %> |
+<%= link_to 'Back', shortened_urls_path %>

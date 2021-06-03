@@ -1,0 +1,29 @@
+<h1>Shortened Urls</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Target</th>
+      <th>Short form</th>
+      <th>Visit count</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shortened_urls.each do |shortened_url| %>
+      <tr>
+        <td><%= shortened_url.target %></td>
+        <td><%= shortened_url.short_form %></td>
+        <td><%= shortened_url.visit_count %></td>
+        <td><%= link_to 'Show', shortened_url %></td>
+        <td><%= link_to 'Edit', edit_shortened_url_path(shortened_url) %></td>
+        <td><%= link_to 'Destroy', shortened_url, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Shortened Url', new_shortened_url_path %>
