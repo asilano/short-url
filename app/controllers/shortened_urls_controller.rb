@@ -3,7 +3,7 @@ class ShortenedUrlsController < ApplicationController
 
   # GET /shortened_urls or /shortened_urls.json
   def index
-    @shortened_urls = ShortenedUrl.all
+    @shortened_urls = ShortenedUrl.where(user: current_user)
   end
 
   # GET /shortened_urls/1 or /shortened_urls/1.json
@@ -22,6 +22,7 @@ class ShortenedUrlsController < ApplicationController
   # POST /shortened_urls or /shortened_urls.json
   def create
     @shortened_url = ShortenedUrl.new(shortened_url_params)
+    @shortened_url.user = current_user
 
     respond_to do |format|
       if @shortened_url.save
@@ -57,13 +58,14 @@ class ShortenedUrlsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_shortened_url
-      @shortened_url = ShortenedUrl.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def shortened_url_params
-      params.require(:shortened_url).permit(:target, :short_form, :user, :visit_count)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_shortened_url
+    @shortened_url = ShortenedUrl.where(user: current_user).find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def shortened_url_params
+    params.require(:shortened_url).permit(:target)
+  end
 end

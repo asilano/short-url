@@ -14,7 +14,7 @@
     <% @shortened_urls.each do |shortened_url| %>
       <tr>
         <td><%= shortened_url.target %></td>
-        <td><%= shortened_url.short_form %></td>
+        <td><%= URI.join(request.base_url, shortened_url.short_form) %></td>
         <td><%= shortened_url.visit_count %></td>
         <td><%= link_to 'Show', shortened_url %></td>
         <td><%= link_to 'Edit', edit_shortened_url_path(shortened_url) %></td>

@@ -30,4 +30,10 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        shortened_url:
+          attributes:
+            short_form:
+              out_of_space: Cannot create any more short URLs - out of unique keys

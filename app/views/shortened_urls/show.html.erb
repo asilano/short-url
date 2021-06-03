@@ -5,7 +5,7 @@
 
 <p>
   <strong>Short form:</strong>
-  <%= @shortened_url.short_form %>
+  <%= URI.join(request.base_url, @shortened_url.short_form) %>
 </p>
 
 <p>
