@@ -60,6 +60,8 @@ class ShortenedUrlsController < ApplicationController
 
   def visit
     @shortened_url = ShortenedUrl.find_by(short_form: params[:short_form])
+    raise ActiveRecord::RecordNotFound unless @shortened_url
+
     @shortened_url.count_visit
 
     redirect_to @shortened_url.target
