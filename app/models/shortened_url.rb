@@ -19,12 +19,9 @@ class ShortenedUrl < ApplicationRecord
   # clashes before that point.
   # If this does generate a duplicate, the uniqueness validation will catch it
   def generate_short_form
-    candidate = nil
     3.times do
-      candidate = SecureRandom.urlsafe_base64(4)
-      break if ShortenedUrl.where(short_form: candidate).blank?
+      self.short_form = SecureRandom.urlsafe_base64(4)
+      break if ShortenedUrl.where(short_form: short_form).blank?
     end
-
-    self.short_form = candidate
   end
 end
